@@ -1,0 +1,66 @@
+﻿@model List<LMS.Models.Course>
+@{
+    ViewBag.Title = "Courses";
+}
+<br />
+<br />
+@if (User.Identity.IsAuthenticated)
+{
+    using (@Html.BeginForm("addCourse", "Course", FormMethod.Post, new { id = "AddCourseForm" }))
+    {
+        <input name="Name" placeholder="Name" />
+        <br />
+        <input name="Description" placeholder="Description" />
+        <br />
+        <input class="DatePicker " name="DateStarts" placeholder="Start Date" />
+        <br />
+        <input class="DatePicker" name="DateEnds" placeholder="End Date" />
+        <br />
+        <input id="ImageUrl" name="ImageUrl" />
+        <br />
+        <input type="submit" value="Add News" />
+    }
+    <form action="\ImageUpload\SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 50px; background: none; border: none;">
+        <div class="fallback">
+            <input name="file" type="file" multiple />
+            <input type="submit" value="Upload" />
+        </div>
+    </form>
+}
+
+@foreach (var item in Model)
+{
+    <h2>@item.Name</h2>
+    <h4>@item.Description</h4>
+    <p class="DateStartsEnds" data-start="@item.DateStarts" data-end="@item.DateEnds"></p>
+    <img src="@item.ImageUrl" style="height:200px; width:160px;" />
+}
+
+<script>
+    $('#AddCourseForm').submit(function (e) {
+        e.preventDefault();
+        $("#ImageUrl").val('/Images/Uploads/' + file.name);
+        $.ajax({
+            url: '/Course/addCourse',
+            type: 'post',
+            data: $('#AddCourseForm').serialize(),
+            success: function (data) {
+                location.reload();
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
+
+    $(function () {
+        $(".DatePicker").datepicker({ dateFormat:  'dd/mm/yy' });
+        $(".DateStartsEnds").each(function (index) {
+            this.innerHTML = new Date($(this).data('start')).toDateString() + ' - ' + new Date($(this).data('end')).toDateString();
+        });
+    })
+
+
+
+</script>

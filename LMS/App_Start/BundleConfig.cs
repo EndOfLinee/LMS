@@ -37,6 +37,11 @@ namespace LMS
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
             "~/Scripts/jquery-ui-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/template").Include(
+            "~/Scripts/agency.js",
+            "~/Scripts/cbpAnimatedHeader.js",
+            "~/Scripts/classie.js"));
+
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
               "~/Content/themes/base/jquery-ui.css",
               "~/Content/themes/base/jquery.ui.core.css",

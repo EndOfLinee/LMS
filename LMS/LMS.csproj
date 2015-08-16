@@ -262,6 +262,7 @@
     <Content Include="Images\team\1.jpg" />
     <Content Include="Images\team\2.jpg" />
     <Content Include="Images\team\3.jpg" />
+    <Content Include="Scripts\agency.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -271,6 +272,8 @@
     <None Include="Properties\PublishProfiles\cisco-macedonia - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\cisco-macedonia - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\cbpAnimatedHeader.js" />
+    <Content Include="Scripts\classie.js" />
     <Content Include="Scripts\dropzone\basic.css" />
     <Content Include="Scripts\dropzone\basic.min.css" />
     <Content Include="Scripts\dropzone\dropzone-amd-module.js" />

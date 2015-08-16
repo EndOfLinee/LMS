@@ -10,3 +10,6 @@
 /// <reference path="dropzone/dropzone.min.js" />
 /// <reference path="jquery-ui-1.11.4.min.js" />
 /// <reference path="trumbowyg.js" />
+/// <reference path="agency.js" />
+/// <reference path="cbpanimatedheader.js" />
+/// <reference path="classie.js" />

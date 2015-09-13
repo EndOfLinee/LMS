@@ -9,11 +9,24 @@ namespace LMS.Controllers
 {
     public class CourseController : Controller
     {
-        Provider db = new Provider();
+        LMS_CISCOEntities db = new LMS_CISCOEntities();
         public ActionResult Index()
         {
-            List<Course> models = db.Courses.OrderByDescending(c => c.DateCreated ).ToList();
-            return View(models);
+            CourseWrapper model = new CourseWrapper();
+            model.ListOfCourses = (db.Courses.OrderByDescending(c => c.DateCreated ).ToList());
+            model.SelectedCourse = model.ListOfCourses[0];
+            model.Entries = (db.CourseEntries.Where(x => x.CourseId == model.SelectedCourse.Id).ToList());
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            CourseWrapper model = new CourseWrapper();
+            model.ListOfCourses = (db.Courses.OrderByDescending(c => c.DateCreated).ToList());
+            model.SelectedCourse = model.ListOfCourses[id];
+            model.Entries = (db.CourseEntries.Where(x => x.CourseId == model.SelectedCourse.Id).OrderByDescending(c => c.DateCreated).ToList());
+            return View("Index", model);
         }
 
         [HttpPost]
@@ -38,6 +51,31 @@ namespace LMS.Controllers
             {
                 return Json(new { Message = e.Message.ToString() });
             }
+        }
+
+        [HttpPost]
+        public ActionResult addCourseEntry(CourseEntry model)
+        {
+            try
+            {
+                if (model.Title != "" && model.Content != "")
+                {
+                    model.DateCreated = DateTime.Now.ToUniversalTime();
+                    model.Deleted = false;
+                    db.CourseEntries.Add(model);
+                    db.SaveChanges();
+                    return Json(new { Message = "success" });
+                }
+                else
+                {
+                    throw new Exception("not all fields are filled");
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(new { Message = e.Message.ToString() });
+            }
+            throw new Exception("not all fields are filled");
         }
     }
 }

@@ -32,15 +32,15 @@ namespace LMS
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/agency.css"));
+                      "~/font-awesome/css/font-awesome.css",
+                      "~/Content/agency.css",
+                      "~/Content/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
             "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/template").Include(
-            "~/Scripts/agency.js",
-            "~/Scripts/cbpAnimatedHeader.js",
-            "~/Scripts/classie.js"));
+            "~/Scripts/agency.js"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
               "~/Content/themes/base/jquery-ui.css",

@@ -7,6 +7,7 @@
 body {
     overflow-x: hidden;
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    overflow-y:hidden;
 }
 
 .text-muted {
@@ -34,9 +35,7 @@ a.active {
     outline: 0;
 }
 
-a {
-    color: #fed136;
-}
+
 
 a:hover,
 a:focus,
@@ -211,7 +210,9 @@ fieldset[disabled] .btn-xl.active {
     letter-spacing: 1px;
     color: #fff;
 }
-
+.logsign{
+    color:white !important;
+}
 .navbar-default .nav li a:hover,
 .navbar-default .nav li a:focus {
     outline: 0;
@@ -231,6 +232,9 @@ fieldset[disabled] .btn-xl.active {
 }
 
 @media(min-width:768px) {
+     body{
+        overflow-y:scroll;
+    }
     .navbar-default {
         padding: 25px 0;
         border: 0;
@@ -265,7 +269,7 @@ header {
     text-align: center;
     color: #fff;s
     background-attachment: scroll;
-    background-image: url(/Images/header.jpg);
+    background-image: url(../img/header.jpg);
     background-position: center center;
     background-repeat: none;
     -webkit-background-size: cover;
@@ -653,7 +657,7 @@ aside.clients img {
 
 section#contact {
     background-color: #222;
-    background-image: url(/Images/map-image.png);
+    background-image: url(../Images/map-image.png);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -768,6 +772,31 @@ ul.social-buttons li a:active {
     outline: 0;
 }
 
+.cd-user-modal {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s 0, visibility 0 0.3s;
+}
+ 
+.cd-user-modal.is-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s 0, visibility 0 0;
+}
+
+.modal-content1 .container{
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    background: #FFF;
+    margin: 3em auto 4em;
+    cursor: auto;
+    border-radius: 0.25em;
+}
+
+.modal-content1 button{
+}
+
 .portfolio-modal .modal-content {
     padding: 100px 0;
     min-height: 100%;
@@ -846,12 +875,12 @@ ul.social-buttons li a:active {
 
 ::-moz-selection {
     text-shadow: none;
-    background: #fed136;
+    background: #0e96cc;
 }
 
 ::selection {
     text-shadow: none;
-    background: #fed136;
+    background: #0e96cc;
 }
 
 img::selection {
@@ -863,10 +892,38 @@ img::-moz-selection {
 }
 
 body {
-    webkit-tap-highlight-color: #fed136;
+    webkit-tap-highlight-color: #0e96cc;
 }
 
 .test{
     width: 100%;
     height: 100%;
 }
+
+
+.video-section .pattern-overlay {
+padding: 110px 0 32px;
+min-height: 496px; 
+/* Incase of overlay problems just increase the min-height*/
+}
+.video-section h1, .video-section h3{
+text-align:center;
+color:#fff;
+}
+.video-section h1{
+font-size:110px;
+font-family: 'Buenard', serif;
+font-weight:bold;
+text-transform: uppercase;
+margin: 40px auto 0px;
+text-shadow: 1px 1px 1px #000;
+-webkit-text-shadow: 1px 1px 1px #000;
+-moz-text-shadow: 1px 1px 1px #000;
+}
+.video-section h3{
+font-size: 25px;
+font-weight:lighter;
+margin: 0px auto 15px;
+}
+.video-section .buttonBar{display:none;}
+.player {font-size: 1px;}

@@ -1,45 +1,112 @@
-﻿@model List<LMS.Models.Course>
+﻿@model LMS.Models.CourseWrapper
 @{
     ViewBag.Title = "Courses";
 }
-<br />
-<br />
-@if (User.Identity.IsAuthenticated)
-{
-    using (@Html.BeginForm("addCourse", "Course", FormMethod.Post, new { id = "AddCourseForm" }))
-    {
-        <input name="Name" placeholder="Name" />
-        <br />
-        <input name="Description" placeholder="Description" />
-        <br />
-        <input class="DatePicker " name="DateStarts" placeholder="Start Date" />
-        <br />
-        <input class="DatePicker" name="DateEnds" placeholder="End Date" />
-        <br />
-        <input id="ImageUrl" name="ImageUrl" />
-        <br />
-        <input type="submit" value="Add News" />
-    }
-    <form action="\ImageUpload\SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 50px; background: none; border: none;">
-        <div class="fallback">
-            <input name="file" type="file" multiple />
-            <input type="submit" value="Upload" />
+<div style="height:100px;"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                @if (User.Identity.IsAuthenticated)
+            {
+                using (@Html.BeginForm("addCourse", "Course", FormMethod.Post, new { id = "AddCourseForm" }))
+                {
+                        <input name="Name" class="form-control" placeholder="Name" />
+                        <br />
+                        <input name="Description" class="form-control" placeholder="Description" />
+                        <br />
+                        <input class="DatePicker form-control" name="DateStarts" placeholder="Start Date" />
+                        <br />
+                        <input class="DatePicker form-control" name="DateEnds" placeholder="End Date" />
+                        <br />
+                        <input id="ImageUrl" name="ImageUrl" class="hidden" />
+                        <br />
+                        <input class="btn btn-primary pull-right" type="submit" value="Add Course" />
+                    }
+                }
+            </div>
+            <div class="row">
+                <ul class="nav nav-pills nav-stacked courseslist">
+                    @foreach (var item in Model.ListOfCourses)
+                    {
+                        if (item.Id == Model.SelectedCourse.Id)
+                        {
+                            <li role="presentation" class="active">
+                                <a href="/Course/Details/@item.Id">@item.Name</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li role="presentation">
+                                <a href="/Course/Details/@item.Id">@item.Name</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
         </div>
-    </form>
-}
-
-@foreach (var item in Model)
-{
-    <h2>@item.Name</h2>
-    <h4>@item.Description</h4>
-    <p class="DateStartsEnds" data-start="@item.DateStarts" data-end="@item.DateEnds"></p>
-    <img src="@item.ImageUrl" style="height:200px; width:160px;" />
-}
+        <div class="col-md-9">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button id="toggleAddNew" class="btn btn-success pull-right">Add Course Entry</button>
+                    </div>
+                    <br />
+                    <div id="AddCourseEntryFormWrapper" class="col-md-12" style="display:none;">
+                        <div class="panel panel-default" style="padding:15px;">
+                            <form id="AddCourseEntryForm">
+                                <div class="form-group">
+                                    <label for="Title">Course Entry Title</label>
+                                    <input class="form-control" name="Title" id="Title" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Content">Course Entry Content</label>
+                                    <textarea rows="5" class="form-control" name="Content" id="Content" maxlength="1000"></textarea>
+                                </div>
+                                <div id="preview-template" style="background:url('/Images/drag_and_drop.jpg'); height:120px; width:120px;" class="dz-preview dz-file-preview">
+                                    <div class="dz-details" id="toBeHidden">
+                                        <img data-dz-thumbnail />
+                                    </div>
+                                </div>
+                                <input class="hidden" name="ImageUrl" id="ImageUrl2">
+                                <img class="hidden img-responsive" id="Uploaded" src="~/Images/file-icon.png" style="height:120px;" />
+                                <textarea class="hidden" name="CourseId" id="CourseId" maxlength="1000">@Model.SelectedCourse.Id</textarea>
+                                <input class="btn btn-primary pull-right" type="submit" value="Save" />
+                                <div style="clear:both"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row"></div>
+            @foreach (var item in Model.Entries)
+            {
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4>@item.Title</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>@item.Content</p>
+                            @if (item.ImageUrl != null)
+                            {
+                                <a href="@item.ImageUrl" class="pull-right">
+                                    <img class="img-responsive" id="Uploaded" src="~/Images/file-icon.png" style="height:50px;" />
+                                </a>
+                                <div style="clear:both;"></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 <script>
     $('#AddCourseForm').submit(function (e) {
         e.preventDefault();
-        $("#ImageUrl").val('/Images/Uploads/' + file.name);
         $.ajax({
             url: '/Course/addCourse',
             type: 'post',
@@ -53,14 +120,33 @@
         });
     });
 
-
-    $(function () {
-        $(".DatePicker").datepicker({ dateFormat:  'dd/mm/yy' });
-        $(".DateStartsEnds").each(function (index) {
-            this.innerHTML = new Date($(this).data('start')).toDateString() + ' - ' + new Date($(this).data('end')).toDateString();
-        });
+    $("#toggleAddNew").click(function () {
+        $("#AddCourseEntryFormWrapper").toggle(500);
     })
-
+    if ($("#preview-template")[0]) {
+        $("#preview-template").dropzone({
+            url: "/ImageUpload/SaveUploadedFile", maxFiles: 1, previewTemplate: $("#preview-template")[0].innerHTML, accept: function (file, done) {
+                $("#preview-template").addClass("hidden");
+                $("#ImageUrl2").val('/Images/Uploads/' + file.name);
+                $("#Uploaded").removeClass("hidden");
+                done();
+            }
+        });
+    }
+    $('#AddCourseEntryForm').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/Course/addCourseEntry',
+            type: 'post',
+            data: $('#AddCourseEntryForm').serialize(),
+            success: function (data) {
+                location.reload();
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
 
 
 </script>

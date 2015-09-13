@@ -9,7 +9,7 @@ namespace LMS.Controllers
 {
     public class HomeController : Controller
     {
-        Provider db = new Provider();
+        LMS_CISCOEntities db = new LMS_CISCOEntities();
         public ActionResult Index()
         {
             List<News> models = db.News.Where(m => m.Deleted == false).OrderByDescending(c => c.DateCreated).ToList();

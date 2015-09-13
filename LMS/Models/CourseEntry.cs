@@ -12,13 +12,14 @@ namespace LMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Contact
+    public partial class CourseEntry
     {
         public int Id { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public string ImageUrl { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Message { get; set; }
+        public Nullable<bool> Deleted { get; set; }
+        public Nullable<int> CourseId { get; set; }
     }
 }

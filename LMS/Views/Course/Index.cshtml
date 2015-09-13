@@ -46,10 +46,10 @@
             </div>
         </div>
         <div class="col-md-9">
-            @if (User.Identity.IsAuthenticated)
+            @if (User.Identity.IsAuthenticated && Model.SelectedCourse.Id >0)
             {
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" style="padding-bottom:15px;">
                         <button id="toggleAddNew" class="btn btn-success pull-right">Add Course Entry</button>
                     </div>
                     <br />

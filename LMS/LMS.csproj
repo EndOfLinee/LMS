@@ -173,34 +173,34 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contact.cs">
-      <DependentUpon>Provider.tt</DependentUpon>
+      <DependentUpon>DatabaseProvider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Course.cs">
-      <DependentUpon>Provider.tt</DependentUpon>
+      <DependentUpon>DatabaseProvider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CourseEntry.cs">
-      <DependentUpon>Provider.tt</DependentUpon>
+      <DependentUpon>DatabaseProvider.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CourseWrapper.cs" />
+    <Compile Include="Models\DatabaseProvider.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseProvider.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatabaseProvider.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseProvider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatabaseProvider.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseProvider.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\News.cs">
-      <DependentUpon>Provider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Provider.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Provider.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Provider.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Provider.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Provider.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Provider.edmx</DependentUpon>
+      <DependentUpon>DatabaseProvider.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -292,15 +292,15 @@
     <Content Include="Images\team\1.jpg" />
     <Content Include="Images\team\2.jpg" />
     <Content Include="Images\team\3.jpg" />
-    <Content Include="Models\Provider.Context.tt">
+    <Content Include="Models\DatabaseProvider.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Provider.edmx</DependentUpon>
-      <LastGenOutput>Provider.Context.cs</LastGenOutput>
+      <DependentUpon>DatabaseProvider.edmx</DependentUpon>
+      <LastGenOutput>DatabaseProvider.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Provider.tt">
+    <Content Include="Models\DatabaseProvider.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Provider.cs</LastGenOutput>
-      <DependentUpon>Provider.edmx</DependentUpon>
+      <DependentUpon>DatabaseProvider.edmx</DependentUpon>
+      <LastGenOutput>DatabaseProvider.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\agency.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -339,12 +339,12 @@
     <Content Include="font-awesome\scss\_spinning.scss" />
     <Content Include="font-awesome\scss\_stacked.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
-    <EntityDeploy Include="Models\Provider.edmx">
+    <EntityDeploy Include="Models\DatabaseProvider.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Provider.Designer.cs</LastGenOutput>
+      <LastGenOutput>DatabaseProvider.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Provider.edmx.diagram">
-      <DependentUpon>Provider.edmx</DependentUpon>
+    <Content Include="Models\DatabaseProvider.edmx.diagram">
+      <DependentUpon>DatabaseProvider.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\cisco-macedonia - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\cisco-macedonia - Web Deploy.pubxml" />

@@ -13,10 +13,10 @@ namespace LMS.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LMS_CISCOEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public LMS_CISCOEntities()
-            : base("name=LMS_CISCOEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
@@ -25,9 +25,9 @@ namespace LMS.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
-        public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<CourseEntry> CourseEntries { get; set; }
+        public virtual DbSet<Course> Courses { get; set; }
+        public virtual DbSet<News> News { get; set; }
     }
 }

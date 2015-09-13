@@ -9,13 +9,21 @@ namespace LMS.Controllers
 {
     public class CourseController : Controller
     {
-        LMS_CISCOEntities db = new LMS_CISCOEntities();
+        Entities db = new Entities();
         public ActionResult Index()
         {
             CourseWrapper model = new CourseWrapper();
-            model.ListOfCourses = (db.Courses.OrderByDescending(c => c.DateCreated ).ToList());
-            model.SelectedCourse = model.ListOfCourses[0];
-            model.Entries = (db.CourseEntries.Where(x => x.CourseId == model.SelectedCourse.Id).ToList());
+            model.ListOfCourses = (db.Courses.OrderByDescending(c => c.DateCreated).ToList());
+            if (model.ListOfCourses.Count > 0 )
+            {
+                model.SelectedCourse = model.ListOfCourses[0];
+                model.Entries = (db.CourseEntries.Where(x => x.CourseId == model.SelectedCourse.Id).ToList());
+            }
+            else
+            {
+                model.SelectedCourse = new Course();
+                model.Entries = new List<CourseEntry>();
+            }
             return View(model);
         }
 
@@ -24,7 +32,7 @@ namespace LMS.Controllers
         {
             CourseWrapper model = new CourseWrapper();
             model.ListOfCourses = (db.Courses.OrderByDescending(c => c.DateCreated).ToList());
-            model.SelectedCourse = model.ListOfCourses[id];
+            model.SelectedCourse = db.Courses.Where(c => c.Id == id).ToList()[0];
             model.Entries = (db.CourseEntries.Where(x => x.CourseId == model.SelectedCourse.Id).OrderByDescending(c => c.DateCreated).ToList());
             return View("Index", model);
         }
